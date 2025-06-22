@@ -1,0 +1,20 @@
+// routes/auth.js
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const router = express.Router();
+
+const JWT_SECRET = process.env.JWT_SECRET;
+
+router.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  // Replace with real DB check later
+  if (username === 'admin' && password === '1234') {
+    const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
+    return res.json({ token });
+  } else {
+    return res.status(401).json({ message: 'Invalid credentials' });
+  }
+});
+
+module.exports = router;

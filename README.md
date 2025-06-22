@@ -1,1 +1,1 @@
-# ECoR-Leave-Appt-Management-System
+# ECoR-Appt-Leave-Management-System

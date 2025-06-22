@@ -1,0 +1,190 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { CiEdit } from "react-icons/ci";
+import { MdOutlineDateRange } from "react-icons/md";
+import { GoClock } from "react-icons/go";
+import { LiaUserTieSolid } from "react-icons/lia";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { MdDeleteOutline } from "react-icons/md";
+import "./LeaveList.css";
+
+const LeaveList = ({ fromDate, toDate, isLoggedIn, showLogin }) => {
+  const [leaves, setLeaves] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const fetchLeaves = async () => {
+    try {
+      let url = "http://localhost:5001/api/leaves";
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (!Array.isArray(data)) {
+        console.error("Invalid response format:", data);
+        setLeaves([]);
+        return;
+      }
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const filteredLeaves = fromDate && toDate
+        ? data.filter(leave => {
+            const from = new Date(leave.from).setHours(0, 0, 0, 0);
+            const to = new Date(leave.to).setHours(0, 0, 0, 0);
+            return from >= new Date(fromDate).setHours(0, 0, 0, 0) &&
+                   to <= new Date(toDate).setHours(0, 0, 0, 0);
+          })
+        : data.filter(leave => {
+            const from = new Date(leave.from).setHours(0, 0, 0, 0);
+            const to = new Date(leave.to).setHours(0, 0, 0, 0);
+            return to >= today;
+          });
+
+      setLeaves(filteredLeaves);
+    } catch (error) {
+      console.error("Failed to load leaves:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLeaves();
+  }, [fromDate, toDate, location.pathname]);
+
+  const getDateClass = (from, to) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const fromDate = new Date(from);
+    fromDate.setHours(0, 0, 0, 0);
+    const toDate = new Date(to);
+    toDate.setHours(0, 0, 0, 0);
+
+    if (fromDate <= today && toDate >= today) return "today"; // ongoing + starts today
+    if (fromDate.getTime() === today.getTime() + 86400000) return "tomorrow";
+    if (fromDate > today) return "future";
+    if (toDate < today) return "past";
+    return "";
+  };
+
+  const handleEdit = (leave) => {
+    if (!isLoggedIn) {
+      alert("Please login to edit leaves.");
+      return;
+    }
+    navigate(`/edit/${leave._id}`);
+  };
+
+  const handleDelete = async (id) => {
+    const confirm = window.confirm("Are you sure you want to delete this leave?");
+    if (!confirm) return;
+
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:5001/api/leaves/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert("Leave deleted successfully.");
+        fetchLeaves(); // refresh list
+      } else {
+        alert("Error: " + data.message);
+      }
+    } catch (error) {
+      alert("Failed to delete leave.");
+    }
+  };
+
+  const renderCard = (leave) => {
+    const category = getDateClass(leave.from, leave.to);
+    const cardClass = `leave-card ${category}`;
+
+    return (
+      <div key={leave._id} className={cardClass}>
+        {isLoggedIn && category !== "past" && (
+          <div className="admin-controls">
+            <CiEdit className="edit-icon" onClick={() => handleEdit(leave)} title="Edit Leave" />
+            <MdDeleteOutline className="delete-icon" onClick={() => handleDelete(leave._id)} title="Delete Leave" />
+          </div>
+        )}
+        <div className="col left">
+          <div className="date">
+            <MdOutlineDateRange className="icon" />
+            From: {new Date(leave.from).toLocaleDateString("en-GB")} <br />
+            To: {new Date(leave.to).toLocaleDateString("en-GB")}
+          </div>
+          <div className="time">
+            <GoClock className="icon" />
+            Out To: {leave.outTo}
+          </div>
+        </div>
+        <div className="col middle">
+          <div className="name">
+            <LiaUserTieSolid className="icon" />
+            <strong>{leave.officer}</strong>
+          </div>
+        </div>
+        <div className="col right">
+          <div className="purpose">
+            <IoDocumentTextOutline className="icon" />
+            {leave.purpose}
+          </div>
+          <span className={`badge ${leave.type === "Duty" ? "duty" : "leave"}`}>{leave.type}</span>
+        </div>
+      </div>
+    );
+  };
+
+  if (showLogin && !isLoggedIn) return null;
+
+  const groupedLeaves = {
+    today: [],
+    tomorrow: [],
+    future: [],
+    past: [],
+  };
+
+  leaves.forEach((leave) => {
+    const category = getDateClass(leave.from, leave.to);
+    if (groupedLeaves[category]) {
+      groupedLeaves[category].push(leave);
+    }
+  });
+
+  return (
+    <div className="centered-page">
+      <h2 className="section-title">Leave Records</h2>
+      
+      <div className="leave-list">
+  {(() => {
+    const groupOrder = fromDate && toDate
+      ? ["past", "today", "tomorrow", "future"]
+      : ["today", "tomorrow", "future"];
+
+    return groupOrder.map((key) => {
+      const list = groupedLeaves[key] || [];
+      return list.length > 0 ? (
+        <div key={key}>
+          <h3 className="group-heading">{key.charAt(0).toUpperCase() + key.slice(1)} Leaves</h3>
+          {list.map((leave) => renderCard(leave))}
+        </div>
+      ) : null;
+    });
+  })()}
+</div>
+
+      <div className="legend">
+        <div><span className="color-box today"></span>Today</div>
+        <div><span className="color-box tomorrow"></span>Tomorrow</div>
+        <div><span className="color-box future"></span>Future</div>
+        <div><span className="color-box past"></span>Past</div>
+      </div>
+    </div>
+  );
+};
+
+export default LeaveList;

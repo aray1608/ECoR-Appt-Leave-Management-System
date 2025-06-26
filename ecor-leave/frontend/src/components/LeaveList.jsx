@@ -32,8 +32,9 @@ const LeaveList = ({ fromDate, toDate, isLoggedIn, showLogin }) => {
         ? data.filter(leave => {
             const from = new Date(leave.from).setHours(0, 0, 0, 0);
             const to = new Date(leave.to).setHours(0, 0, 0, 0);
-            return from >= new Date(fromDate).setHours(0, 0, 0, 0) &&
-                   to <= new Date(toDate).setHours(0, 0, 0, 0);
+            const rangeStart = new Date(fromDate).setHours(0, 0, 0, 0);
+            const rangeEnd = new Date(toDate).setHours(0, 0, 0, 0);
+            return to >= rangeStart && from <= rangeEnd;
           })
         : data.filter(leave => {
             const from = new Date(leave.from).setHours(0, 0, 0, 0);
@@ -160,22 +161,22 @@ const LeaveList = ({ fromDate, toDate, isLoggedIn, showLogin }) => {
       <h2 className="section-title">Leave Records</h2>
       
       <div className="leave-list">
-  {(() => {
-    const groupOrder = fromDate && toDate
-      ? ["past", "today", "tomorrow", "future"]
-      : ["today", "tomorrow", "future"];
+        {(() => {
+          const groupOrder = fromDate && toDate
+            ? ["past", "today", "tomorrow", "future"]
+            : ["today", "tomorrow", "future"];
 
-    return groupOrder.map((key) => {
-      const list = groupedLeaves[key] || [];
-      return list.length > 0 ? (
-        <div key={key}>
-          <h3 className="group-heading">{key.charAt(0).toUpperCase() + key.slice(1)} Leaves</h3>
-          {list.map((leave) => renderCard(leave))}
-        </div>
-      ) : null;
-    });
-  })()}
-</div>
+          return groupOrder.map((key) => {
+            const list = groupedLeaves[key] || [];
+            return list.length > 0 ? (
+              <div key={key}>
+                <h3 className="group-heading">{key.charAt(0).toUpperCase() + key.slice(1)} Leaves</h3>
+                {list.map((leave) => renderCard(leave))}
+              </div>
+            ) : null;
+          });
+        })()}
+      </div>
 
       <div className="legend">
         <div><span className="color-box today"></span>Today</div>

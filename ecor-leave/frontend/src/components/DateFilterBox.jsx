@@ -39,7 +39,7 @@ const DateFilterBox = ({ onFilter }) => {
     <div className={`date-filter-container ${isOpen ? "open" : ""}`} ref={containerRef}>
       <div className="header" onClick={() => setIsOpen(!isOpen)}>
         <SlCalender className="calendar-icon" />
-        <h2>View Past Leaves</h2>
+        <h2>View Leaves</h2>
         <div className="dropdown-toggle">
           Select Date Range
           <span className={`arrow ${isOpen ? "up" : "down"}`}>▾</span>

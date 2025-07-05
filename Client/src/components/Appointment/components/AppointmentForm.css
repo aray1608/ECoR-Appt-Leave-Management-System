@@ -1,0 +1,213 @@
+/* Popup overlay covers whole screen and sits on top */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100; 
+}
+
+.appointment-form-container {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px 30px;
+  width: 600px;
+  max-height: 90vh; /* max 75% viewport height */
+  overflow-y: auto; /* scroll if content overflows */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  font-family: "Segoe UI", sans-serif;
+  box-sizing: border-box;
+  z-index: 1101;
+  margin-top: 60px;
+}
+.appointment-form-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Title */
+.appointment-form-container h2 {
+  font-size: 24px;
+  margin-bottom: 3px;
+  color: #333;
+  text-align: left;
+}
+
+/* Subtitle */
+.appointment-form-container p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Form layout */
+.appointment-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* reduced gap for compactness */
+}
+
+/* Label styling */
+.appointment-form-container label {
+  font-weight: 500;
+  color: #333;
+  font-size: 15px;
+}
+
+/* Input wrapper */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f6f8fa;
+  border: 1px solid #ccc;
+  padding: 8px 12px; /* less padding for smaller height */
+  border-radius: 8px;
+  margin-top: 6px;
+}
+
+/* Inputs and selects */
+.input-wrapper input,
+.input-wrapper select {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  outline: none;
+}
+
+/* Textarea styling */
+.input-wrapper textarea {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  outline: none;
+  resize: vertical;
+  min-height: 60px; /* smaller height */
+  max-height: 100px; /* max height */
+}
+
+/* VIP checkbox */
+.vip-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.vip-checkbox input {
+  width: 16px;
+  height: 16px;
+}
+
+.vip-checkbox label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Button group */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px; /* reduced margin */
+}
+
+/* Buttons */
+button[type="submit"],
+button[type="reset"],
+button[type="button"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Submit button */
+button[type="submit"] {
+  background-color: #0c2f54;
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Reset button */
+button[type="reset"] {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+button[type="reset"]:hover {
+  background-color: #cfcfcf;
+}
+
+/* Return to Homepage button */
+button[type="button"] {
+  background-color: #999;
+  color: white;
+}
+
+button[type="button"]:hover {
+  background-color: #777;
+}
+
+/* Icon color */
+.iconse {
+  color: #0c2f54;
+}
+
+/* Confirm modal styles - keep if used */
+.confirm-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-buttons button:first-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+.modal-buttons button:last-child {
+  background-color: #007bff;
+  color: white;
+}

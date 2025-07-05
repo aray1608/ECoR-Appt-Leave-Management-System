@@ -1,0 +1,163 @@
+/* .date-filter-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 120px auto 40px auto;
+  padding: 16px 30px;
+  background-color: #fdfdfd;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  max-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.date-filter-container.open {
+  max-height: 450px;
+  padding-bottom: 30px;
+} */
+
+.date-filter-container {
+  width: 1000px;
+
+    margin: 120px auto;
+    padding: 16px 30px;
+    background-color: #fdfdfd;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    max-height: 35px; /* enough to show header + toggle initially */
+}
+
+.date-filter-container.open {
+max-height: 400px;
+    padding-bottom: 30px;
+}
+
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.calendar-icon {
+  color: #003366;
+  font-size: 18px;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #000000;
+  font-weight: 500;
+}
+
+.dropdown-toggle {
+  padding: 10px 18px;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #003366;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.arrow {
+  font-size: 16px;
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+
+.arrow.up {
+  transform: rotate(180deg);
+}
+
+.date-range-section {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  opacity: 0;
+  max-height: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, max-height 0.4s ease;
+}
+
+.date-filter-container.open .date-range-section {
+  opacity: 1;
+  max-height: 200px;
+  pointer-events: auto;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 220px;
+}
+
+.input-group label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+.input-group input[type="date"] {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+.input-group input[type="date"]:focus {
+  outline: none;
+  border-color: #003366;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  align-items: flex-end;
+  margin-top: 20px;
+}
+
+.cancel-btn,
+.apply-btn {
+  padding: 10px 22px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background-color: #999;
+  color: white;
+}
+
+.apply-btn {
+  background-color: #003366;
+  color: white;
+}
+
+.apply-btn:hover {
+  background-color: #0051a3;
+}

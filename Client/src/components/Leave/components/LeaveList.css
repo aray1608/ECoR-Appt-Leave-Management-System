@@ -1,0 +1,285 @@
+.centered-page {
+  max-width: 1100px;
+  margin: -100px auto 0 auto;
+  padding: 0 16px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.floating-edit-form::-webkit-scrollbar {
+  display: none;
+}
+.blurred-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.05);
+  z-index: 9998;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.floating-edit-form {
+  background: white;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow: hidden;
+  z-index: 9999;
+  transform: translateZ(0);
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Title */
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  padding-left: 10px;
+  border-left: 4px solid #007acc;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Group heading like "Ongoing Leaves" */
+.group-heading {
+  margin: 24px 0 12px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #37474f;
+  border-bottom: 2px solid #dfe6e9;
+  padding-bottom: 6px;
+}
+
+/* Leave list layout */
+.leave-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+/* Leave Card Styling */
+.leave-card {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  margin-bottom: 8px;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  gap: 20px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.back-btn-container {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.back-btn {
+  padding: 10px 20px;
+  background-color: #003366;
+  color: white;
+  border: none;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #0056b3;
+}
+
+.leave-card.ongoing {
+  background-color: #fffde7;
+  border-left: 6px solid #ffb300;
+}
+
+.leave-card.today {
+  background-color: #fff3e0;
+  border-left: 6px solid #ff9800;
+}
+
+.leave-card.tomorrow {
+  background-color: #e6f7ff;
+  border-left: 6px solid #03a9f4;
+}
+
+.leave-card.future {
+  background-color: #e8f5e9;
+  border-left: 6px solid #4caf50;
+}
+
+.leave-card.past {
+  background-color: #f0f0f0;
+  border-left: 6px solid #9e9e9e;
+}
+
+/* Column layout inside card */
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.date,
+.time,
+.name,
+.purpose {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: #2e2e2e;
+}
+
+.icon {
+  margin-right: 8px;
+  color: #1966a4;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* Badge for type */
+.badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  align-self: flex-start;
+  margin-top: 6px;
+  color: white;
+  text-transform: uppercase;
+}
+
+.badge.leave {
+  background-color: #e53935;
+}
+
+.badge.duty {
+  background-color: #1e88e5;
+}
+
+/* Edit/Delete Icons */
+.edit-icon,
+.delete-icon {
+  position: absolute;
+  top: 8px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  color: #2c3e50;
+}
+
+.edit-icon {
+  right: 32px;
+}
+
+.edit-icon:hover {
+  color: #0077cc;
+}
+
+.delete-icon {
+  right: 8px;
+}
+
+.delete-icon:hover {
+  color: #e74c3c;
+}
+
+/* LEGEND */
+.legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 40px auto;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.color-box {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  border-radius: 3px;
+}
+
+.color-box.ongoing {
+  background-color: #fffde7;
+  border: 1px solid #ffb300;
+}
+
+.color-box.today {
+  background-color: #fff3e0;
+  border: 1px solid #ff9800;
+}
+
+.color-box.tomorrow {
+  background-color: #e6f7ff;
+  border: 1px solid #03a9f4;
+}
+
+.color-box.future {
+  background-color: #e8f5e9;
+  border: 1px solid #4caf50;
+}
+
+.color-box.past {
+  background-color: #f0f0f0;
+  border: 1px solid #9e9e9e;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .leave-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .col {
+    width: 100%;
+  }
+
+  .section-title {
+    font-size: 22px;
+  }
+
+  .group-heading {
+    font-size: 18px;
+  }
+
+  .edit-icon,
+  .delete-icon {
+    top: 6px;
+    font-size: 1.1rem;
+  }
+
+  .edit-icon {
+    right: 30px;
+  }
+
+  .delete-icon {
+    right: 6px;
+  }
+
+  .legend {
+    gap: 16px;
+    font-size: 14px;
+  }
+}

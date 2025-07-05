@@ -1,0 +1,169 @@
+/* AppointmentForm.css */
+
+.appointment-form-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 24px 28px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+}
+
+.appointment-form-container h2 {
+  font-size: 24px;
+  margin-bottom: 3px;
+  color: #333;
+  text-align: left;
+}
+
+.appointment-form-container p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.appointment-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.appointment-form-container label {
+  font-weight: 500;
+  color: #333;
+  font-size: 15px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f6f8fa;
+  border: 1px solid #ccc;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-top: 6px;
+}
+
+.input-wrapper input,
+.input-wrapper select {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  outline: none;
+}
+
+.input-wrapper textarea {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  outline: none;
+  resize: vertical;
+}
+
+.vip-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.vip-checkbox input {
+  width: 16px;
+  height: 16px;
+}
+
+.vip-checkbox label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button[type="submit"],
+button[type="reset"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"] {
+  background-color: #0c2f54;
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+button[type="reset"] {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+button[type="reset"]:hover {
+  background-color: #cfcfcf;
+}
+
+.iconse {
+  color: #0c2f54;
+}
+
+.confirm-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-buttons button:first-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+.modal-buttons button:last-child {
+  background-color: #007bff;
+  color: white;
+}
